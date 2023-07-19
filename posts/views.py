@@ -13,16 +13,16 @@ class PostListView(generics.ListAPIView):
     def get_queryset(self):
         """ Returns a list of posts based on the user's preferences."""
         
-        # recuperer l'utiliseur actuel
+        # recupérer l'utiliseur actuel
         user = self.request.user
         
-        # recuperer le profile de l'utilisateur
+        # recupérer le profile de l'utilisateur
         profile = user.profile
         
-        # recuperations des preferences de l'utilisateur
+        # recupérer les préférences de l'utilisateur contenues dans le profile
         preferences = profile.preferences.all()
         
-        # Filtrer les posts en fonction des preferences de l'utilisateur
+        # Filtrer les posts en fonction des préférences de l'utilisateur
         queryset = Post.objects.filter(category__in = preferences)
         
         return queryset
