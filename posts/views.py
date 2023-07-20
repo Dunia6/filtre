@@ -22,6 +22,12 @@ class PostListView(generics.ListAPIView):
         # recupérer les préférences de l'utilisateur contenues dans le profile
         preferences = profile.preferences.all()
         
+        if not preferences:
+            """ Récupérer tous les posts si l'utilisateur n'a pas de préférences"""
+            queryset = Post.objects.all()
+          
+            return queryset
+        
         # Filtrer les posts en fonction des préférences de l'utilisateur
         queryset = Post.objects.filter(category__in = preferences)
         
