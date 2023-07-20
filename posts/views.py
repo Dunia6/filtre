@@ -80,3 +80,9 @@ class PostLikeView(generics.GenericAPIView):
         serializer = self.get_serializer(post)
         
         return Response(serializer.data)
+    
+    def get(self, request, pk):
+        """ Récupérer le nombre de likes d'un post """
+        post = self.get_object()
+        return Response({'likes_count': post.likes_count})
+  
